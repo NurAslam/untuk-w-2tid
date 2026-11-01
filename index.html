@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#ffe9ee">
+<title>Untuk Wulan</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="loader" role="status">
+  <div class="loader-box">
+    <div class="loader-text" id="loaderText">Menyiapkan kado...</div>
+    <div class="loader-bar"><i></i></div>
+  </div>
+</div>
+
+<div id="bubble" class="hidden" role="status"></div>
+<div id="tapHint" class="hidden"></div>
+
+<div id="counter" class="hidden" aria-live="polite"><span class="star">&#9733;</span> <b id="countNum">0/7</b></div>
+<div id="hint" class="hidden"></div>
+
+<div id="joy" class="hidden" aria-hidden="true"><div id="knob"></div></div>
+
+<div id="card" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="cardTitle">
+  <div class="card-box">
+    <h2 id="cardTitle"></h2>
+    <p id="cardText"></p>
+    <button id="cardClose" type="button">Tutup</button>
+  </div>
+</div>
+
+<div id="photo" class="overlay hidden" role="dialog" aria-modal="true" aria-label="Foto">
+  <div class="photo-box">
+    <img id="photoImg" alt="">
+    <button id="photoClose" type="button">Tutup</button>
+  </div>
+</div>
+
+<button id="mute" class="hidden" type="button" aria-label="Bisukan musik" aria-pressed="false">&#128266;</button>
+<div id="toast" class="hidden" role="status" aria-live="polite"></div>
+
+<div id="cakeMsg" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="cakeTitle">
+  <div class="card-box big">
+    <h2 id="cakeTitle"></h2>
+    <p id="cakeText"></p>
+    <button id="cakeClose" type="button">Tutup</button>
+  </div>
+</div>
+
+<div id="tvOv" class="overlay hidden" role="dialog" aria-modal="true" aria-label="TV">
+  <div class="tv-box">
+    <p id="tvText" class="tv-text"></p>
+    <div id="tvFrame" class="tv-frame"></div>
+    <div class="tv-nav">
+      <button id="tvPrev" type="button" aria-label="Sebelumnya">&lt;</button>
+      <span id="tvCount"></span>
+      <button id="tvNext" type="button" aria-label="Berikutnya">&gt;</button>
+    </div>
+    <div class="tv-act">
+      <a id="tvLink" class="btn" href="#" target="_blank" rel="noopener noreferrer"></a>
+      <button id="tvClose" type="button">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<div id="endOv" class="end hidden" role="dialog" aria-modal="true" aria-labelledby="endTitle">
+  <div id="endScroll" class="end-scroll">
+    <div class="end-inner">
+      <h2 id="endTitle"></h2>
+      <p id="endText"></p>
+      <p id="endFrom" class="end-from"></p>
+      <div id="endPhotos" class="end-photos"></div>
+      <button id="endBack" type="button">Kembali ke taman</button>
+    </div>
+  </div>
+</div>
+
+<div id="fade"></div>
+<div id="fallback" class="hidden"></div>
+
+<script src="vendor/three/three.min.js" defer></script>
+<script src="js/fe2.js" defer></script>
+<script src="js/main.js" defer></script>
+</body>
+</html>
