@@ -53,6 +53,7 @@
       ['G4', .75], ['G4', .25], ['G5', 1], ['E5', 1], ['C5', 1], ['B4', 1], ['A4', 1],
       ['F5', .75], ['F5', .25], ['E5', 1], ['C5', 1], ['D5', 1], ['C5', 2]];
     function playHBD() {   // dipanggil dari gestur pengguna (ketukan)
+      if (song.playing) return;   // lagu masih main: jangan tumpuk
       try {
         var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
         if (!audio.ctx) {
@@ -83,8 +84,34 @@
     }
     $('mute').addEventListener('click', function () {
       audio.muted = !audio.muted;
-      if (audio.master) audio.master.gain.value = audio.muted ? 0 : 0.5;
+      applyGain(); if (song.a) song.a.muted = audio.muted;
       updateMute();
+    });
+    function applyGain() { if (audio.master) audio.master.gain.value = audio.muted ? 0 : 0.5; }
+
+    // ---------- lagu "Panjang Umur" (file lokal, <audio>) ----------
+    // Dimuat + diputar saat ketukan pertama pada kado (gestur). Tanpa loop. Tidak dihentikan saat pindah adegan/pop-up/penutup.
+    // Bila lagu masih main saat lilin ditiup, WebAudio HBD tidak dibunyikan (tidak menumpuk).
+    var song = { a: null, started: false, playing: false, ended: false };
+    function showSongBtn(on) { show('songPlay', on); }
+    function startSong() {
+      if (song.started) return; song.started = true;
+      var L = U.lagu; if (!L || !L.src) return;
+      var a = new Audio(); song.a = a; a.preload = 'auto'; a.loop = false; a.muted = audio.muted; a.setAttribute('playsinline', '');
+      a.addEventListener('playing', function () { song.playing = true; song.ended = false; showSongBtn(false); });
+      a.addEventListener('pause', function () { song.playing = false; });
+      a.addEventListener('ended', function () { song.playing = false; song.ended = true; });
+      a.src = L.src;
+      show('mute', true); updateMute();
+      var pr; try { pr = a.play(); } catch (e) { pr = null; showSongBtn(true); }
+      if (pr && pr.catch) pr.catch(function () { showSongBtn(true); });   // ditolak (mis. iOS): tombol kecil
+    }
+    window.addEventListener('kado:tapkado', startSong);
+    $('songPlay').textContent = U.lagu ? U.lagu.putar : '';
+    $('songPlay').addEventListener('click', function () {
+      if (!song.a) return;
+      var pr; try { pr = song.a.play(); } catch (e) { return; }
+      if (pr && pr.catch) pr.catch(function () {});
     });
     document.addEventListener('visibilitychange', function () {
       if (!audio.ctx) return;
@@ -196,6 +223,7 @@
       $('tvPrev').setAttribute('aria-label', U.sebelumnya); $('tvNext').setAttribute('aria-label', U.berikutnya);
       $('tvClose').textContent = U.tutup;
       openOv('tvOv'); showReel(); $('tvClose').focus({ preventScroll: true });
+      window.dispatchEvent(new CustomEvent('kado:tvopened'));
     }
     function closeTV() { $('tvFrame').textContent = ''; closeOv('tvOv'); }   // iframe dilepas
     $('tvClose').addEventListener('click', closeTV);
@@ -300,7 +328,7 @@
 
     // ---------- Esc ----------
     window.addEventListener('kado:esc', function () {
-      if (openId === 'tvOv') closeTV(); else if (openId === 'cakeMsg') $('cakeClose').click(); else if (openId === 'endOv') closeOv('endOv');
+      if (openId === 'tvOv') closeTV(); else if (openId === 'cakeMsg') $('cakeClose').click(); else if (openId === 'endOv') $('endBack').click();
     });
     window.addEventListener('kado:allvisited', function () {
       if (state.blown) setTimeout(function () { toast(U.mawarSiap, 4200); }, 1500);
@@ -322,7 +350,8 @@
     });
 
     K._fe2 = {
-      state: function () { return { blown: state.blown, bloomed: rose.done, open: openId, ready: ready(), eco: K.isEco(), iframes: document.querySelectorAll('iframe').length, muted: audio.muted, audioState: audio.ctx && audio.ctx.state }; },
+      song: function () { return song.a; },
+      state: function () { return { blown: state.blown, bloomed: rose.done, open: openId, ready: ready(), eco: K.isEco(), iframes: document.querySelectorAll('iframe').length, muted: audio.muted, song: { started: song.started, playing: song.playing, ended: song.ended, paused: song.a ? song.a.paused : null, muted: song.a ? song.a.muted : null, loop: song.a ? song.a.loop : null }, audioState: audio.ctx && audio.ctx.state }; },
       blow: blow, openTV: openTV, tapRose: tapRose
     };
   };

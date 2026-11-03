@@ -23,7 +23,7 @@
   "tv": "Kiriman lucu dari internet, khusus buat yang lagi ulang tahun.",
   "penutup": {
     "judul": "Untuk Wulan",
-    "isi": "Wulan,\n\nSelamat ulang tahun. Di balik semua candaan tadi, aku cuma mau bilang: terima kasih sudah jadi kamu. Semoga tahun ini lebih lapang, langkahmu lebih ringan, dan hal-hal baik datang tanpa perlu kamu kejar terlalu keras.\n\nTetap jadi Wulan yang hangat, yang bikin orang di sekitarnya merasa betah.\n\nSelamat bertambah usia, Wulan Novalyah Ramadhani.",
+    "isi": "Wulan, selamat 24 tahun 🎉\n\nSelamat ulang tahun. Di balik semua candaan tadi, aku cuma mau bilang: terima kasih sudah jadi kamu. Semoga tahun ini lebih lapang, langkahmu lebih ringan, dan hal-hal baik datang tanpa perlu kamu kejar terlalu keras.\n\nTetap jadi Wulan yang hangat, yang bikin orang di sekitarnya merasa betah.\n\nSelamat bertambah usia, Wulan Novalyah Ramadhani.",
     "dari": "Nur Aslam"
   },
   "ui": {
@@ -51,7 +51,26 @@
     "embedGagal": "Video tidak tampil? Pakai tombol di bawah.",
     "reelKe": "Video {i} dari {n}",
     "judulKue": "Kue",
-    "judulTv": "TV"
+    "judulTv": "TV",
+    "misi": {
+      "judul": "🎮 MISI ULANG TAHUN WULAN",
+      "sub": "Level: 1 tahun lebih dewasa",
+      "joyHp": "Gerakkan karakter pakai joystick",
+      "joyDesk": "Gerakkan karakter pakai WASD / panah",
+      "makanan": "Temukan 7 makanan favorit & baca pesannya ({n}/7)",
+      "lilin": "Tiup lilin di kue (ketuk lilinnya)",
+      "tv": "Mampir ke TV, ada kiriman lucu",
+      "mawar": "Kalau semua beres, mawar akan mekar... ada hadiah terakhir",
+      "foto": "Psst, foto-foto di taman bisa diketuk juga 📸",
+      "mulai": "MULAI MAIN ▶",
+      "tutupAria": "Tutup daftar misi",
+      "tombol": "📜 Misi",
+      "tombolAria": "Buka daftar misi"
+    },
+    "lagu": {
+      "src": "audio/panjang-umur.mp3",
+      "putar": "▶ Putar lagu"
+    }
   },
   "reels": [
     "https://www.instagram.com/reel/DeIvBccSJRj/",

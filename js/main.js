@@ -19,7 +19,8 @@
   var updaters = [];
   var visited = {};
   var extLock = false, eco = false;
-  function blocked() { return cardOpen || photoOpen || extLock; }
+  var modalOpen = false;
+  function blocked() { return cardOpen || photoOpen || extLock || modalOpen; }
 
   // ---------- util ----------
   var matCache = {};
@@ -183,10 +184,12 @@
     if (kado.state === 'idle' || kado.state === 'shaken') {
       kado.taps++;
       if (kado.taps === 1) {
+        window.dispatchEvent(new CustomEvent('kado:tapkado'));
         kado.shake = 0.7; kado.state = 'shaken';
         setText('bubble', data.kado); showEl('bubble', true);
         setText('tapHint', data.ui.tapLagi);
       } else {
+        window.dispatchEvent(new CustomEvent('kado:tapkado'));   // cadangan bila ketukan pertama tak terpicu
         kado.state = 'open'; kado.t = 0;
         showEl('bubble', false); showEl('tapHint', false);
         burst();
@@ -531,6 +534,7 @@
       showEl('hint', true);
       setTimeout(function () { $('hint').style.opacity = 0; }, 6000);
       f.classList.remove('on');
+      window.dispatchEvent(new CustomEvent('kado:garden'));
     }, RM ? 0 : 520);
   }
 
@@ -617,6 +621,7 @@
       addPickable: function (mesh, fn) { mesh.userData = { kind: 'hook', fn: fn }; pickables.push(mesh); },
       showCard: openCard, closeCard: closeCard,
       lock: function (on) { extLock = !!on; if (on) resetInput(); },
+      setModal: function (on) { modalOpen = !!on; if (on) resetInput(); },
       isEco: function () { return eco; }, reducedMotion: RM, _forceEco: setEco,
       ui: { setText: setText, showEl: showEl, $: $ },
       scene_name: function () { return sceneName; },

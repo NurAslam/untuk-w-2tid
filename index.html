@@ -42,6 +42,21 @@
 </div>
 
 <button id="mute" class="hidden" type="button" aria-label="Bisukan musik" aria-pressed="false">&#128266;</button>
+<button id="songPlay" class="hidden" type="button"></button>
+<button id="misiBtn" class="hidden" type="button"></button>
+
+<div id="misi" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="misiTitle">
+  <div class="misi-box" id="misiBox">
+    <i class="cf" aria-hidden="true"></i><i class="cf" aria-hidden="true"></i><i class="cf" aria-hidden="true"></i><i class="cf" aria-hidden="true"></i><i class="cf" aria-hidden="true"></i><i class="cf" aria-hidden="true"></i>
+    <button id="misiX" class="misi-x" type="button">&#10005;</button>
+    <h2 id="misiTitle"></h2>
+    <p id="misiSub" class="misi-sub"></p>
+    <ul id="misiList" class="misi-list"></ul>
+    <p id="misiFoto" class="misi-foto"></p>
+    <button id="misiGo" class="misi-go" type="button"></button>
+  </div>
+</div>
+
 <div id="toast" class="hidden" role="status" aria-live="polite"></div>
 
 <div id="cakeMsg" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="cakeTitle">
@@ -86,5 +101,6 @@
 <script src="vendor/three/three.min.js" defer></script>
 <script src="js/fe2.js" defer></script>
 <script src="js/main.js" defer></script>
+<script src="js/misi.js" defer></script>
 </body>
 </html>
